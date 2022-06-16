@@ -1,4 +1,4 @@
-FROM ubuntu:20.04
+FROM ubuntu:22.04
 
 ARG MYGHKEY
 
@@ -22,5 +22,5 @@ RUN git config --global --add user.name "Ashish Disawal" \
     && git config --global --add user.email "ashish.disawal@gmail.com" \
     && ssh-keyscan -H gitlab.com >> ~/.ssh/known_hosts
 
-RUN cat /home/ashish/.ssh/id_rsa && ssh git@github.com
+RUN md5sum /home/ashish/.ssh/id_rsa && ssh git@github.com
 #    && git clone git@github.com:shifu137/go-dev-env.git ~/repos/go-dev-env

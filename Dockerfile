@@ -11,7 +11,7 @@ RUN echo 'ashish   ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 
 RUN mkdir /home/ashish/repos
 RUN mkdir /home/ashish/.ssh && chmod 700 /home/ashish/.ssh
-RUN echo $MYGHKEY | base64 --decode > /home/ashish/.ssh/id_rsa && chmod 400 /home/ashish/.ssh/id_rsa
+RUN echo $MYGHKEY | base64 --ignore-garbage --decode > /home/ashish/.ssh/id_rsa && chmod 400 /home/ashish/.ssh/id_rsa
 
 RUN chown -R ashish.ashish /home/ashish/
 

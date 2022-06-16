@@ -44,12 +44,13 @@ jobs:
           echo IMAGE_ID=$IMAGE_ID
           echo VERSION=$VERSION
 
-          docker pull $IMAGE_ID:$VERSION
-          
-          docker build . --file Dockerfile \
-          --cache-from $IMAGE_ID:$VERSION \
-          --build-arg MYGHKEY="${{ secrets.EWGLKEY }}" \
-          --tag $IMAGE_NAME
+          docker pull $IMAGE_ID:$VERSION && { docker build . --file Dockerfile \
+            --cache-from $IMAGE_ID:$VERSION \
+            --build-arg MYGHKEY="${{ secrets.EWGLKEY }}" \
+            --tag $IMAGE_NAME \
+          } || { \
+            docker build . --file Dockerfile --build-arg MYGHKEY="${{ secrets.EWGLKEY }}" --tag $IMAGE_NAME \
+          }
 
       - name: Push image
         run: |

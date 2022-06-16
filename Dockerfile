@@ -8,11 +8,10 @@ RUN apt update && apt upgrade -y && \
 RUN groupadd -g 1000 ashish \
     && useradd -u 1000 -g 1000 -m ashish \
     && echo 'ashish   ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers \
-    && mkdir /home/ashish/repos \
-    && mkdir /home/ashish/.ssh && chmod 700 /home/ashish/.ssh \
+    && mkdir -v /home/ashish/repos /home/ashish/.ssh && chmod -v 700 /home/ashish/.ssh \
     && echo $MYGHKEY | base64 --ignore-garbage --decode > /home/ashish/.ssh/id_rsa \
-    && chmod 400 /home/ashish/.ssh/id_rsa \
-    && chown -R ashish.ashish /home/ashish/
+    && chmod -v 400 /home/ashish/.ssh/id_rsa \
+    && chown -Rv ashish.ashish /home/ashish
 
 # Things to do as ashish user
 USER ashish
@@ -22,5 +21,5 @@ RUN git config --global --add user.name "Ashish Disawal" \
     && git config --global --add user.email "ashish.disawal@gmail.com" \
     && ssh-keyscan -H gitlab.com >> ~/.ssh/known_hosts
 
-RUN md5sum /home/ashish/.ssh/id_rsa && ssh git@github.com
-#    && git clone git@github.com:shifu137/go-dev-env.git ~/repos/go-dev-env
+RUN ls -al /home/ashish/.ssh \
+    && git clone git@github.com:shifu137/go-dev-env.git ~/repos/go-dev-env

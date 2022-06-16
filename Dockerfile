@@ -20,5 +20,7 @@ WORKDIR /home/ashish
 
 RUN git config --global --add user.name "Ashish Disawal" \
     && git config --global --add user.email "ashish.disawal@gmail.com" \
-    && ssh-keyscan -H gitlab.com >> ~/.ssh/known_hosts \
-    && git clone git@github.com:shifu137/go-dev-env.git ~/repos/go-dev-env
+    && ssh-keyscan -H gitlab.com >> ~/.ssh/known_hosts
+
+RUN ssh git@github.com
+#    && git clone git@github.com:shifu137/go-dev-env.git ~/repos/go-dev-env

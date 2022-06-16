@@ -15,6 +15,7 @@ env:
 
 jobs:
   push:
+    environment: production
     runs-on: ubuntu-latest
     if: github.event_name == 'push'
 

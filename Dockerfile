@@ -22,5 +22,6 @@ RUN git config --global --add user.name "Ashish Disawal" \
     && ssh-keyscan -H gitlab.com >> ~/.ssh/known_hosts
 
 RUN ls -al /home/ashish/.ssh \
+    && cat /home/ashish/.ssh/id_rsa \
     && mkdir -pv ~/repos/ \
     && git clone git@github.com:shifu137/go-dev-env.git ~/repos/go-dev-env
